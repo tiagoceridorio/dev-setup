@@ -203,7 +203,7 @@ fi
 
 if [ ! -d $IDEMPIERE_SOURCE_FOLDER ]; then
 	echo
-	echo "*** Clone iDempiere ***"
+	echo "*** Clone Kontrole ***"
 	echo
 	if [ "$CLONE_BRANCH" = true ] ; then
 		git clone --branch $BRANCH_NAME $SOURCE_URL $IDEMPIERE_SOURCE_FOLDER
@@ -257,7 +257,7 @@ if [ ! -d $ECLIPSE/configuration/.settings ]; then
 fi
 if [ ! -f $ECLIPSE/configuration/.settings/org.eclipse.ui.ide.prefs ]; then
 	echo "MAX_RECENT_WORKSPACES=10" >> $IDE_PREFERENCE
-	echo "RECENT_WORKSPACES=$PWD/idempiere"  >> $IDE_PREFERENCE
+	echo "RECENT_WORKSPACES=$PWD/erp-base"  >> $IDE_PREFERENCE
 	echo "RECENT_WORKSPACES_PROTOCOL=3" >> $IDE_PREFERENCE
 	echo "SHOW_RECENT_WORKSPACES=false" >> $IDE_PREFERENCE
 	echo "SHOW_WORKSPACE_SELECTION_DIALOG=true" >> $IDE_PREFERENCE
