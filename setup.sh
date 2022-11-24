@@ -176,6 +176,9 @@ fi
 
 if [ "$INSTALL_POSTGRES_LOCAL" = true ] ; then
 	sudo apt install postgresql -y
+    sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD '*PostgreS*';"
+    sudo sed -i  '/^local all all peer/ s/peer/md5/' /etc/postgresql/14/main/pg_hba.conf
+    sudo service postgresql restart
 fi
 
 if [ -z "$JAVA_HOME" ]; then
