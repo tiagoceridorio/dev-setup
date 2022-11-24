@@ -164,6 +164,9 @@ do
 done
 
 if [ "$INSTALL_JAVA_OPENJDK" = true ] ; then
+	echo
+	echo "*** Install JavaOpenJDK ***"
+	echo
     sudo apt update
 	sudo apt install openjdk-11-jdk -y
     sudo apt install maven -y
@@ -171,12 +174,24 @@ if [ "$INSTALL_JAVA_OPENJDK" = true ] ; then
 fi
 
 if [ "$INSTALL_GIT" = true ] ; then
+	echo
+	echo "*** Install Git ***"
+	echo
 	sudo apt install git -y
 fi
 
 if [ "$INSTALL_POSTGRES_LOCAL" = true ] ; then
+	echo
+	echo "*** Install PostgreSQL ***"
+	echo
 	sudo apt install postgresql -y
+    echo
+	echo "*** Alter PostgreSQL Password ***"
+	echo
     sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD '*PostgreS*';"
+    echo
+	echo "*** Update PG_HBA File ***"
+	echo
     sudo sed -i  '/^local all all peer/ s/peer/md5/' /etc/postgresql/14/main/pg_hba.conf
     sudo service postgresql restart
 fi
@@ -213,6 +228,13 @@ if [ ! -d $IDEMPIERE_SOURCE_FOLDER ]; then
 else
 	git -C $IDEMPIERE_SOURCE_FOLDER pull
 fi
+
+if [ ! -d $IDEMPIERE_SOURCE_FOLDER ]; then
+	echo -e "Please verify Bitbucket Password"
+	echo -e "Error on Clone Repository of ERP-BASE"
+	exit 0
+fi
+
 if [ ! -f apache-groovy-binary-3.0.7.zip ]; then
 	echo
 	echo "*** Download groovy ***"
