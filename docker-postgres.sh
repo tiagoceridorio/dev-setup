@@ -36,4 +36,4 @@ do
     esac
 done
 
-docker run -d --name $DOCKER_POSTGRES_NAME -p $DB_PORT:5432 -e POSTGRES_PASSWORD=$DB_SYSTEM postgres:9.6
+docker run -d --name $DOCKER_POSTGRES_NAME -p $DB_PORT:5432 -e POSTGRES_PASSWORD=$DB_SYSTEM postgres:14

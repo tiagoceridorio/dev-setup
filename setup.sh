@@ -1,19 +1,22 @@
+INSTALL_JAVA_OPENJDK=true
+INSTALL_GIT=true
+INSTALL_POSTGRES_LOCAL=true
 CREATE_DOCKER_POSTGRES=false
 DOCKER_POSTGRES_NAME=${DOCKER_POSTGRES_NAME:-postgres}
 LOAD_IDEMPIERE_ENV=false
 SETUP_DB=true
 CLONE_BRANCH=false
-SOURCE_URL=https://github.com/idempiere/idempiere.git
-IDEMPIERE_SOURCE_FOLDER=${IDEMPIERE_SOURCE_FOLDER:-idempiere}
+SOURCE_URL=https://bitbucket.org/barkdevelopers/erp-base.git
+IDEMPIERE_SOURCE_FOLDER=${IDEMPIERE_SOURCE_FOLDER:-erp-base}
 IDEMPIERE_HOST=${IDEMPIERE_HOST:-0.0.0.0}
 IDEMPIERE_PORT=${IDEMPIERE_PORT:-8080}
 IDEMPIERE_SSL_PORT=${IDEMPIERE_SSL_PORT:-8443}
-DB_NAME=${DB_NAME:-idempiere}
+DB_NAME=${DB_NAME:-erp}
 DB_HOST=${DB_HOST:-localhost}
 DB_PORT=${DB_PORT:-5432}
-DB_USER=${DB_USER:-adempiere}
-DB_PASS=${DB_PASS:-adempiere}
-DB_SYSTEM=${DB_SYSTEM:-postgres}
+DB_USER=${DB_USER:-kontrole}
+DB_PASS=${DB_PASS:-kontrole}
+DB_SYSTEM=${DB_SYSTEM:-*PostgreS*}
 ECLIPSE=${ECLIPSE:-eclipse}
 MIGRATE_EXISTING_DATABASE=${MIGRATE_EXISTING_DATABASE:-true}
 
@@ -23,8 +26,14 @@ do
     --help)
     echo "Usage: setup.sh [OPTION]"
     echo ""
+    echo -e "  --install-java-openjdk"
+    echo -e "\t Install Java OpenJDK"
+    echo -e "  --install-git"
+    echo -e "\t Install GIT"
+    echo -e "  --install-postgres-local"
+    echo -e "\t Install PostgreSQL Local"
     echo -e "  --create-docker-postgres"
-    echo -e "\tCreate and run docker postgres 9.6 container"
+    echo -e "\tCreate and run docker postgres 14 container"
     echo -e "  --docker-postgres-name=<postgres container name>"
     echo -e "\tSet docker postgres container name (default is postgres)"
     echo -e "  --db-name=<idempiere database name>"
@@ -63,6 +72,18 @@ do
     echo -e "\tdisplay this help and exit"
     exit 0
     ;;
+    --install-java-openjdk) 
+	INSTALL_JAVA_OPENJDK=true
+	shift
+	;;
+    --install-git) 
+	INSTALL_GIT=true
+	shift
+	;;
+    --install-postgres-local) 
+	INSTALL_POSTGRES_LOCAL=true
+	shift
+	;;
 	--create-docker-postgres) 
 	CREATE_DOCKER_POSTGRES=true
 	shift
@@ -141,6 +162,18 @@ do
 	;;
     esac
 done
+
+if [ "$INSTALL_JAVA_OPENJDK" = true ] ; then
+	sudo apt install openjdk-11-jdk -y
+fi
+
+if [ "$INSTALL_GIT" = true ] ; then
+	sudo apt install git -y
+fi
+
+if [ "$INSTALL_POSTGRES_LOCAL" = true ] ; then
+	sudo apt install postgresql -y
+fi
 
 if [ -z "$JAVA_HOME" ]; then
 	echo -e "Please set the JAVA_HOME environment variable pointing to a JDK 11 installation folder"
