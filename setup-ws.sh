@@ -1,6 +1,6 @@
 M2E_TYCHO_REPOSITORY=https://github.com/tesla/m2eclipse-tycho/releases/download/latest/
 ECLIPSE=${ECLIPSE:-eclipse}
-IDEMPIERE_SOURCE_FOLDER=${IDEMPIERE_SOURCE_FOLDER:-idempiere}
+IDEMPIERE_SOURCE_FOLDER=${IDEMPIERE_SOURCE_FOLDER:-erp-base}
 TARGETPLATFORM_DSL_REPOSITORY=https://download.eclipse.org/cbi/updates/tpd/nightly/N202209040739
 
 for i in "$@"
