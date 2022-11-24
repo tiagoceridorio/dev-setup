@@ -166,6 +166,7 @@ done
 if [ "$INSTALL_JAVA_OPENJDK" = true ] ; then
     sudo apt update
 	sudo apt install openjdk-11-jdk -y
+    sudo apt install maven -y
     export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 fi
 
