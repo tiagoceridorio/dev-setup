@@ -1,5 +1,5 @@
 INSTALL_JAVA_OPENJDK=true
-INSTALL_GIT=true
+INSTALL_GIT=false
 INSTALL_POSTGRES_LOCAL=true
 CREATE_DOCKER_POSTGRES=false
 DOCKER_POSTGRES_NAME=${DOCKER_POSTGRES_NAME:-postgres}
@@ -77,7 +77,7 @@ do
 	shift
 	;;
     --install-git) 
-	INSTALL_GIT=true
+	INSTALL_GIT=false
 	shift
 	;;
     --install-postgres-local) 
@@ -164,6 +164,7 @@ do
 done
 
 if [ "$INSTALL_JAVA_OPENJDK" = true ] ; then
+    sudo apt update
 	sudo apt install openjdk-11-jdk -y
 fi
 
