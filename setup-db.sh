@@ -149,7 +149,7 @@ if ! PGPASSWORD=$DB_PASS psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c
     cd $PRODUCT_FOLDER
 	cd utils
 	echo "Database '$DB_NAME' not found, starting import..."
-	echo -e "\n" | ./RUN_ImportIdempiere.sh
+	echo -e "\n" | ./RUN_ImportIdempiereDev.sh
 	echo "Synchronizing database..."
 	./RUN_SyncDB.sh
 	cd ..
