@@ -141,6 +141,7 @@ echo -e "$JAVA_HOME\n$IDEMPIERE_HOME\n$KEY_STORE_PASS\n$KEY_STORE_ON\n$KEY_STORE
 
 if ! PGPASSWORD=$DB_PASS psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c "\q" > /dev/null 2>&1 ; then
     cd /tmp
+    rm -rf erp-database
     git clone https://bitbucket.org/barkdevelopers/erp-database.git
     cd $PRODUCT_FOLDER
     cd data/seed
